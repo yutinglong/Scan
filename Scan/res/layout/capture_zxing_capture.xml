@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!-- 全屏取景UI -->
+
+    <FrameLayout
+        android:id="@+id/preview_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true" >
+
+        <SurfaceView
+            android:id="@+id/preview_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center" />
+
+        <com.zxing.scan.zxing.view.ViewfinderView
+            android:id="@+id/viewfinder_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/transparent" />
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/barcode_torch_icon"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/top_title_layout"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/barcode_torch_switcher_drawable"
+        android:src="@drawable/barcode_torch_icon_off"
+        android:visibility="gone" />
+
+    <!-- 顶部标题栏 -->
+
+    <RelativeLayout
+        android:id="@+id/newmore_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="#ffffff" >
+
+        <TextView
+            android:id="@+id/newmore_btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:clickable="true"
+            android:drawableLeft="@drawable/personal_ico_return"
+            android:drawablePadding="-5dip"
+            android:gravity="center"
+            android:text="返回"
+            android:textColor="#80737B"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/newmore_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="扫一扫"
+            android:textColor="#80737B"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <!-- 底部操作栏 -->
+    <!--
+     	<com.baidu.supercamera.expertedit.layout.HorizontalListView
+        android:id="@+id/zxing_action_gallery"
+        style="@style/TopTextStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:background="@drawable/sub_bg"
+        android:paddingTop="@dimen/action_gallery_padding_top"
+        android:layout_marginBottom="-2dp"/>
+    -->
+
+
+    <!-- 全屏操作框, 拍摄后的预览动画界面 -->
+
+    <RelativeLayout
+        android:id="@+id/option_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:background="#b4000000"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:visibility="gone" >
+
+        <com.zxing.scan.zxing.view.ViewOptionView
+            android:id="@+id/option_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/option_view"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_zxing_cancel"
+            android:text="取消"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

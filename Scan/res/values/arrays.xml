@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="strs1">
+        <item>便利封(1KG)</item>
+        <item>便利袋(1KG)</item>
+        <item>1号便利箱(2KG)</item>
+        <item>2号便利箱(3KG)</item>
+        <item>3号便利箱(5KG)</item>
+        <item>标准件</item>
+        <item>其他</item>
+    </string-array>
+    
+    <string-array name="strs2">
+        <item>申通</item>
+        <item>圆通</item>
+        <item>中通</item>
+        <item>韵达</item>
+        <item>汇通</item>
+        <item>顺丰</item>
+        <item>宅急送</item>
+        <item>EMS</item>
+        <item>京东</item>
+        <item>亚马逊</item>
+        <item>如风达</item>
+        <item>唯品会</item>
+        <item>全峰快递</item>
+        <item>城市100</item>
+        <item>天天快递</item>
+        <item>苏宁易购</item>
+        <item>优速</item>
+        <item>国通</item>
+        <item>港中能达</item>
+        <item>快捷速递</item>
+        <item>全一快递</item>
+        <item>德邦物流</item>
+        <item>中铁快运</item>
+        <item>其他</item>
+    </string-array>
+    
+    <string-array name="strs3">
+        <item>北京</item>
+        <item>天津</item>
+        <item>河北</item>
+        <item>河南</item>
+        <item>山东</item>
+        <item>山西</item>
+        <item>辽宁</item>
+        <item>福建</item>
+        <item>甘肃</item>
+        <item>安徽</item>
+        <item>黑龙江</item>
+        <item>湖北</item>
+        <item>湖南</item>
+        <item>吉林</item>
+        <item>江苏</item>
+        <item>江西</item>
+        <item>浙江</item>
+        <item>内蒙</item>
+        <item>宁夏</item>
+        <item>陕西</item>
+        <item>上海</item>
+        <item>贵州</item>
+        <item>重庆</item>
+        <item>四川</item>
+        <item>云南</item>
+        <item>广西</item>
+        <item>海南</item>
+        <item>广东</item>
+        <item>青海</item>
+        <item>新疆</item>
+        <item>西藏</item>
+        <item>其他</item>
+    </string-array>
+
+</resources>

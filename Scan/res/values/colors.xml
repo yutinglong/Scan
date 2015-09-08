@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 二维码相关颜色 -->
+
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="viewfinder_frame">#ff000000</color>
+    <color name="viewfinder_laser">#ffff0000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="qr_frame_bg">#f6f6f1</color>
+    <color name="option_bg">#262a2f</color>
+    <color name="white">#ffffff</color>
+    <color name="black_alpha_85">#d9000000</color>
+
+</resources>
