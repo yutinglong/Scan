@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -420,16 +421,23 @@ public class CaptureActivity extends Activity implements Callback, android.view.
 		}
 		playBeepSoundAndVibrate();
 
-		Intent intent = new Intent(this, SubActivity2.class);
-		intent.putExtra("result_data", obj.getText());
-		intent.putExtra("BarcodeFormat", obj.getBarcodeFormat().toString());
-		startActivity(intent);
-		
+//		Intent intent = new Intent(this, SubActivity2.class);
+//		intent.putExtra("result_data", obj.getText());
+//		intent.putExtra("BarcodeFormat", obj.getBarcodeFormat().toString());
+//		startActivity(intent);
 		
 		if(selectHandler != null){
 			selectHandler.removeMessages(R.id.decode_delay);
 			selectHandler.sendEmptyMessageDelayed(R.id.decode_delay, CaptureActivity.DECODE_DELAY_TIME);	
 		}
+		
+		Log.d("YTL", "obj.getText()  == " + obj.getText());
+		
+		String resultString = obj.getText().toString();
+        Intent sendIntent = new Intent();
+        sendIntent.putExtra("resultString", resultString);
+        setResult(RESULT_OK, sendIntent);
+        finish();
 	}
 	
 	public void handleDecodeBookCD(ArrayList<BookOrCDEntity> obj) {
@@ -508,13 +516,13 @@ public class CaptureActivity extends Activity implements Callback, android.view.
 	};
 	
 	
-	@Override
-	public void finish() {
-		Intent data = new Intent();
-		data.putExtra("MODE_2D_CODE", true);
-		setResult(RESULT_OK, data);
-		super.finish();
-	}
+//	@Override
+//	public void finish() {
+//		Intent data = new Intent();
+//		data.putExtra("MODE_2D_CODE", true);
+//		setResult(RESULT_OK, data);
+//		super.finish();
+//	}
 
 	@Override
 	public void onClick(View v) {

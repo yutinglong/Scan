@@ -1,13 +1,15 @@
 package com.zxing.scan;
 
-import com.zxing.scan.zxing.CaptureActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.EditText;
+
+import com.zxing.scan.zxing.CaptureActivity;
 
 public class SubActivity1 extends Activity implements OnClickListener{
 	public static final int REQ_THIRD = 100;
@@ -16,6 +18,11 @@ public class SubActivity1 extends Activity implements OnClickListener{
 	
 	private View btn1;
 	
+	private EditText mOrderEditText;
+	private EditText mEditText1;
+	private EditText mEditText2;
+	private EditText mEditText3;
+	private EditText mEditText4;	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -23,6 +30,12 @@ public class SubActivity1 extends Activity implements OnClickListener{
 		setContentView(R.layout.activity_sub1);
 		
 		initView();
+		
+		Intent mIntent = getIntent();
+		String mOrderId = mIntent.getStringExtra("resultString");
+		Log.d("YTL", "mOrderId11111 = " + mOrderId);
+		
+		mOrderEditText.setText(mOrderId);
 	}
 	
 	private void initView() {
@@ -30,6 +43,16 @@ public class SubActivity1 extends Activity implements OnClickListener{
 		btn1 = findViewById(R.id.btn1);
 		backBtn.setOnClickListener(this);
 		btn1.setOnClickListener(this);
+		
+		mOrderEditText = (EditText) findViewById(R.id.order_id);
+		mEditText1 = (EditText) findViewById(R.id.edittext1);
+		mEditText2 = (EditText) findViewById(R.id.edittext2);
+		mEditText3 = (EditText) findViewById(R.id.edittext3);
+		mEditText4 = (EditText) findViewById(R.id.edittext4);
+	}
+	
+	private void commitData() {
+		
 	}
 	
 	@Override
@@ -39,13 +62,7 @@ public class SubActivity1 extends Activity implements OnClickListener{
 			SubActivity1.this.finish();
 			break;
 		case R.id.btn1:
-			startCamera();
 			break;
 		}
-	}
-	
-	public void startCamera() {
-		Intent intent = new Intent(this, CaptureActivity.class);
-		startActivityForResult(intent, REQ_THIRD);
 	}
 }

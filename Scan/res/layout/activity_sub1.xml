@@ -52,6 +52,7 @@
             android:orientation="vertical" >
 
             <EditText
+                android:id="@+id/order_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dip"
@@ -68,6 +69,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/edittext1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dip"
@@ -84,6 +86,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/edittext2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dip"
@@ -100,6 +103,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/edittext3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dip"
@@ -116,6 +120,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/edittext4"
                 android:layout_width="match_parent"
                 android:layout_height="100dip"
                 android:layout_marginLeft="10dip"
