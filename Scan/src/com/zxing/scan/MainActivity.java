@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.zxing.scan.zxing.CaptureActivity;
@@ -23,6 +24,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	public static final int REQ_THIRD = 100;
 
 	private Button btn1, btn2, btn3;
+	private ImageView setting_img;
 
 	protected Timer timer;
 	private boolean isExit;
@@ -43,9 +45,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		btn1 = (Button) findViewById(R.id.btn1);
 		btn2 = (Button) findViewById(R.id.btn2);
 		btn3 = (Button) findViewById(R.id.btn3);
+		setting_img = (ImageView) findViewById(R.id.setting_img);
 		btn1.setOnClickListener(this);
 		btn2.setOnClickListener(this);
 		btn3.setOnClickListener(this);
+		setting_img.setOnClickListener(this);
 	}
 
 	@Override
@@ -69,6 +73,10 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.btn3:// 微店
 			openURL(MainActivity.this, weidianURL);
+			break;
+		case R.id.setting_img:
+			Intent intent = new Intent(this, SettingActivity.class);
+			startActivity(intent);
 			break;
 		}
 	}

@@ -32,6 +32,8 @@
         <activity android:name="com.zxing.scan.SubActivity1" />
         <activity android:name="com.zxing.scan.SubActivity2" />
         <activity android:name="com.zxing.scan.zxing.CaptureActivity" />
+        <activity android:name="com.zxing.scan.SettingActivity" />
+        
     </application>
 
 </manifest>

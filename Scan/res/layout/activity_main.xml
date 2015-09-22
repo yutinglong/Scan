@@ -57,4 +57,13 @@
         android:text="我的微店"
         android:textColor="#FFFFFF" />
 
+ 	<ImageView
+        android:id="@+id/setting_img"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/me_ico_site"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>
