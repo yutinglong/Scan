@@ -28,10 +28,10 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/btn_pink_bg"
         android:minHeight="80dp"
-        android:text="签收包裹"
+        android:text="签收快件"
         android:textColor="#FFFFFF" />
-
-    <Button
+	
+	<Button
         android:id="@+id/btn2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,14 +41,27 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/btn_pink_bg"
         android:minHeight="80dp"
-        android:text="用户寄件"
+        android:text="代收货"
         android:textColor="#FFFFFF" />
-
+    
     <Button
         android:id="@+id/btn3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn2"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/btn_pink_bg"
+        android:minHeight="80dp"
+        android:text="寄快件"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn3"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"

@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F4F4" >
+
+    <RelativeLayout
+        android:id="@+id/newmore_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff" >
+
+        <TextView
+            android:id="@+id/newmore_btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:clickable="true"
+            android:drawableLeft="@drawable/personal_ico_return"
+            android:drawablePadding="-5dip"
+            android:gravity="center"
+            android:text="返回"
+            android:textColor="#80737B"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/newmore_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="代收货"
+            android:textColor="#80737B"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/refresh_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="刷新"
+            android:textColor="#80737B"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newmore_title_bar"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="包裹在店的用户列表"
+            android:textColor="#80737B"
+            android:textSize="16sp" />
+
+        <ListView
+            android:id="@+id/user_listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
+</RelativeLayout>

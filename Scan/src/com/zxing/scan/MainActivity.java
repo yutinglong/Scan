@@ -23,7 +23,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private static final String weidianURL = "http://weidian.com/item.html?itemID=230780308&wfr=wx&from=singlemessage&isappinstalled=0";
 	public static final int REQ_THIRD = 100;
 
-	private Button btn1, btn2, btn3;
+	private Button btn1, btn2, btn3, btn4;
 	private ImageView setting_img;
 
 	protected Timer timer;
@@ -45,10 +45,12 @@ public class MainActivity extends Activity implements OnClickListener {
 		btn1 = (Button) findViewById(R.id.btn1);
 		btn2 = (Button) findViewById(R.id.btn2);
 		btn3 = (Button) findViewById(R.id.btn3);
+		btn4 = (Button) findViewById(R.id.btn4);
 		setting_img = (ImageView) findViewById(R.id.setting_img);
 		btn1.setOnClickListener(this);
 		btn2.setOnClickListener(this);
 		btn3.setOnClickListener(this);
+		btn4.setOnClickListener(this);
 		setting_img.setOnClickListener(this);
 	}
 
@@ -56,27 +58,23 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn1:// 签收
-//			try {
-//				BaseAPI.requestByGet("http://"
-//						+ BaseAPI.IP_HOST
-//						+ "/dxs/yjAction_add.action?waybillCode=DXS111111118&expressCompanyName=中通&senderUserTelephone=13010456119&senderUserName=李四&type1=便利封(1KG)&senderArea=北京&money=10.0&type=1&state=0&agentCode=daishou20150903&courierUserName=KDY001&recipientUserName=张三&recipientUserTelephone=13717674044&remark=一些备注1");
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-			
 			mPageStatus = 0;
 			startCamera();
 			break;
-		case R.id.btn2:// 寄件
+		case R.id.btn2:// 代收货
+			Intent intent = new Intent(this, SubActivity3.class);
+			startActivity(intent);
+			break;
+		case R.id.btn3:// 寄快件
 			mPageStatus = 1;
 			startCamera();
 			break;
-		case R.id.btn3:// 微店
+		case R.id.btn4:// 微店
 			openURL(MainActivity.this, weidianURL);
 			break;
 		case R.id.setting_img:
-			Intent intent = new Intent(this, SettingActivity.class);
-			startActivity(intent);
+			Intent intentL = new Intent(this, SettingActivity.class);
+			startActivity(intentL);
 			break;
 		}
 	}

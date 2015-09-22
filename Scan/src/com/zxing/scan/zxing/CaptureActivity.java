@@ -84,7 +84,7 @@ public class CaptureActivity extends Activity implements Callback, android.view.
 	
 	public static final int NET_IMAGE_SIZE = 200;
 	public static final int WordDelayTime = 4000;
-	public static final int DECODE_DELAY_TIME = 10000;
+	public static final int DECODE_DELAY_TIME = 100000;
 //	private static final long AUTOFOCUS_TIMEOUT_DELAY = 2000L;
 //	private final Runnable mAutoFocusTimeOutRunnable = new SuperCameraAutoFocusTimeOutRunnable();
 	

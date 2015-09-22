@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:background="@color/white" >
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="王静/189088903"
+        android:textColor="#80737B"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        android:drawablePadding="-5dip"
+        android:gravity="center"
+        android:text="20:02"
+        android:textColor="#80737B"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/num_str"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_below="@+id/name"
+        android:clickable="true"
+        android:drawablePadding="-5dip"
+        android:gravity="center"
+        android:text="1个包裹"
+        android:textColor="#80737B"
+        android:textSize="14sp" />
+
+</RelativeLayout>
