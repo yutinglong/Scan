@@ -84,6 +84,14 @@
         android:paddingTop="@dimen/action_gallery_padding_top"
         android:layout_marginBottom="-2dp"/>
     -->
+    <TextView
+        android:id="@+id/zxing_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="手动输入"
+         />
 
 
     <!-- 全屏操作框, 拍摄后的预览动画界面 -->

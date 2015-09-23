@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +40,15 @@ public class SubActivity2 extends Activity implements OnClickListener{
 	
 	private List<Company> companyList;
 	private List<PackageM> packageList;
-	private List<PlaceM> placeMList;
+	private List<PlaceM> placeShunfengList;
+	
+	private List<PlaceM> placeOtherMList;
+	
+	private boolean isShunfeng = false;// 是否是顺风快递
+	
+	private Company currentCompany;// 快递公司
+	private PackageM currentPackageM;// 包裹重量
+	private PlaceM currentPlaceM;// 地点
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +63,13 @@ public class SubActivity2 extends Activity implements OnClickListener{
 		
 		mEditTextOrderID.setText(mOrderId);
 		
+		getShunfengPlaceList();
+		getOtherPlaceList();
 		getExpressList();
 		getPackageList();
-		getPlaceList();
+		
+		// 先算一遍价格
+		getMoney();
 	}
 	
 	private void initView() {
@@ -71,6 +85,21 @@ public class SubActivity2 extends Activity implements OnClickListener{
 		edittext_money = (EditText) findViewById(R.id.edittext_money);
 		
 		checkbox_money = (CheckBox) findViewById(R.id.checkbox_money);
+		
+		checkbox_money.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton paramCompoundButton,
+					boolean paramBoolean) {
+				if (checkbox_money.isChecked()) {
+					edittext_money.setText("0");
+					edittext_money.setEnabled(false);
+				}
+				else {
+					edittext_money.setText("0");
+					edittext_money.setEnabled(true);
+				}
+			}
+		});
 		
 		edittext_company.setOnClickListener(this);
 		edittext_package.setOnClickListener(this);
@@ -194,29 +223,63 @@ public class SubActivity2 extends Activity implements OnClickListener{
 		}
 	}
 	private void showPlaceSelectDialog() {
-		if (placeMList != null && placeMList.size() > 0) {
-			int length = placeMList.size();
-			String[] array = new String[length];
-			for (int i = 0; i < length; i++) {
-				PlaceM info = placeMList.get(i);
-				array[i] = info.name;
-			}
-			AlertDialog dialog = new AlertDialog.Builder(
-					SubActivity2.this).setItems(array,
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							if (placeMList.size() > which) {
-								String mExpressCompany = placeMList.get(which).name;
-								if (!TextUtils.isEmpty(mExpressCompany)) {
-									mExpressCompany = mExpressCompany.trim();
+		if (isShunfeng) {
+			if (placeShunfengList != null && placeShunfengList.size() > 0) {
+				int length = placeShunfengList.size();
+				String[] array = new String[length];
+				for (int i = 0; i < length; i++) {
+					PlaceM info = placeShunfengList.get(i);
+					array[i] = info.name;
+				}
+				AlertDialog dialog = new AlertDialog.Builder(
+						SubActivity2.this).setItems(array,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								if (placeShunfengList.size() > which) {
+									String mExpressCompany = placeShunfengList.get(which).name;
+									if (!TextUtils.isEmpty(mExpressCompany)) {
+										mExpressCompany = mExpressCompany.trim();
+									}
+									edittext_place.setText(mExpressCompany);
+									
+									currentPlaceM = placeShunfengList.get(which);
+									
+									getMoney();
 								}
-								edittext_place.setText(mExpressCompany);
 							}
-						}
-					}).create();
-			dialog.show();
+						}).create();
+				dialog.show();
+			}
 		}
+		else {
+			if (placeOtherMList != null && placeOtherMList.size() > 0) {
+				int length = placeOtherMList.size();
+				String[] array = new String[length];
+				for (int i = 0; i < length; i++) {
+					PlaceM info = placeOtherMList.get(i);
+					array[i] = info.name;
+				}
+				AlertDialog dialog = new AlertDialog.Builder(
+						SubActivity2.this).setItems(array,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								if (placeOtherMList.size() > which) {
+									String mExpressCompany = placeOtherMList.get(which).name;
+									if (!TextUtils.isEmpty(mExpressCompany)) {
+										mExpressCompany = mExpressCompany.trim();
+									}
+									edittext_place.setText(mExpressCompany);
+									currentPlaceM = placeOtherMList.get(which);
+									getMoney();
+								}
+							}
+						}).create();
+				dialog.show();
+			}
+		}
+		
 	}
 	private void showPackageSelectDialog() {
 		if (packageList != null && packageList.size() > 0) {
@@ -237,6 +300,10 @@ public class SubActivity2 extends Activity implements OnClickListener{
 									mExpressCompany = mExpressCompany.trim();
 								}
 								edittext_package.setText(mExpressCompany);
+								
+								currentPackageM = packageList.get(which);
+								
+								getMoney();
 							}
 						}
 					}).create();
@@ -262,7 +329,10 @@ public class SubActivity2 extends Activity implements OnClickListener{
 								if (!TextUtils.isEmpty(mExpressCompany)) {
 									mExpressCompany = mExpressCompany.trim();
 								}
-								edittext_company.setText(mExpressCompany);
+								currentCompany = companyList.get(which);
+								setExpressText(mExpressCompany);
+								
+								getMoney();
 							}
 						}
 					}).create();
@@ -270,17 +340,27 @@ public class SubActivity2 extends Activity implements OnClickListener{
 		}
 	}
 	
-	private void getPlaceList() {
-		placeMList = new ArrayList<PlaceM>();
+	private void getShunfengPlaceList() {
+		placeShunfengList = new ArrayList<PlaceM>();
 		String[] items = getResources().getStringArray(R.array.strs3);
 		for (int i=0; i<items.length; i++) {
 			PlaceM mPlaceM = new PlaceM();
 			mPlaceM.name = items[i];
-			placeMList.add(mPlaceM);
+			placeShunfengList.add(mPlaceM);
 		}
 		
-		PlaceM mPlaceM = placeMList.get(0);
-		edittext_place.setText(mPlaceM.name);
+//		PlaceM mPlaceM = placeShunfengList.get(0);
+//		edittext_place.setText(mPlaceM.name);
+	}
+	
+	private void getOtherPlaceList() {
+		placeOtherMList = new ArrayList<PlaceM>();
+		String[] items = getResources().getStringArray(R.array.strs4);
+		for (int i=0; i<items.length; i++) {
+			PlaceM mPlaceM = new PlaceM();
+			mPlaceM.name = items[i];
+			placeOtherMList.add(mPlaceM);
+		}
 	}
 	
 	private void getPackageList() {
@@ -294,6 +374,8 @@ public class SubActivity2 extends Activity implements OnClickListener{
 		
 		PackageM mPackageM = packageList.get(0);
 		edittext_package.setText(mPackageM.name);
+		
+		currentPackageM = mPackageM;
 	}
 	
 	private void getExpressList() {
@@ -306,6 +388,237 @@ public class SubActivity2 extends Activity implements OnClickListener{
 		}
 		
 		Company mCompany = companyList.get(0);
-		edittext_company.setText(mCompany.name);
+		currentCompany = mCompany;
+		setExpressText(mCompany.name);
+	}
+	
+	private void setExpressText(String expressName) {
+		edittext_company.setText(expressName);
+		if (expressName != null && expressName.equals(companyList.get(0).name)) {
+			// 顺风快递
+			isShunfeng = true;
+		}
+		else {
+			isShunfeng = false;
+		}
+		
+		refreshPlase();
+	}
+	
+	private void refreshPlase() {
+		if (isShunfeng) {
+			PlaceM mPlaceM = placeShunfengList.get(0);
+			currentPlaceM = mPlaceM;
+			edittext_place.setText(mPlaceM.name);
+		}
+		else {
+			PlaceM mPlaceM = placeOtherMList.get(0);
+			currentPlaceM = mPlaceM;
+			edittext_place.setText(mPlaceM.name);
+		}
+	}
+	
+	private int getMoney() {
+		int result = 0;
+//		private Company currentCompany;// 快递公司
+//		private PackageM currentPackageM;// 包裹重量
+//		private PlaceM currentPlaceM;// 地点
+		if(isShunfeng){// 顺丰
+			String[] shunFengItems = getResources().getStringArray(R.array.strs3);
+			String[] packageItems = getResources().getStringArray(R.array.strs1);
+			if (currentPlaceM.name.equals(shunFengItems[0])) {
+				// 河北、天津、北京
+				if (currentPackageM.name.equals(packageItems[0])) {
+					// 便利封(1KG)
+					result = 15;
+				}
+				else if (currentPackageM.name.equals(packageItems[1])) {
+					// 便利袋(1KG)
+					result = 15;
+				}
+				else if (currentPackageM.name.equals(packageItems[2])) {
+					// 1号便利箱(2KG)
+					result = 18;
+				}
+				else if (currentPackageM.name.equals(packageItems[3])) {
+					// 2号便利箱(3KG)
+					result = 21;
+				}
+				else if (currentPackageM.name.equals(packageItems[4])) {
+					// 3号便利箱(5KG)
+					result = 27;
+				}
+				else if (currentPackageM.name.equals(packageItems[5])) {
+					// 标准件
+					result = 0;
+				}
+				else if (currentPackageM.name.equals(packageItems[6])) {
+					// 其他
+					result = 0;
+				}
+			}
+			else if (currentPlaceM.name.equals(shunFengItems[1])) {
+				// 新疆、西藏
+				if (currentPackageM.name.equals(packageItems[0])) {
+					// 便利封(1KG)
+					result = 26;
+				}
+				else if (currentPackageM.name.equals(packageItems[1])) {
+					// 便利袋(1KG)
+					result = 26;
+				}
+				else if (currentPackageM.name.equals(packageItems[2])) {
+					// 1号便利箱(2KG)
+					result = 48;
+				}
+				else if (currentPackageM.name.equals(packageItems[3])) {
+					// 2号便利箱(3KG)
+					result = 70;
+				}
+				else if (currentPackageM.name.equals(packageItems[4])) {
+					// 3号便利箱(5KG)
+					result = 112;
+				}
+				else if (currentPackageM.name.equals(packageItems[5])) {
+					// 标准件
+					result = 0;
+				}
+				else if (currentPackageM.name.equals(packageItems[6])) {
+					// 其他
+					result = 0;
+				}
+			}
+			else if (currentPlaceM.name.equals(shunFengItems[2])) {
+				// 其他
+				if (currentPackageM.name.equals(packageItems[0])) {
+					// 便利封(1KG)
+					result = 23;
+				}
+				else if (currentPackageM.name.equals(packageItems[1])) {
+					// 便利袋(1KG)
+					result = 23;
+				}
+				else if (currentPackageM.name.equals(packageItems[2])) {
+					// 1号便利箱(2KG)
+					result = 37;
+				}
+				else if (currentPackageM.name.equals(packageItems[3])) {
+					// 2号便利箱(3KG)
+					result = 51;
+				}
+				else if (currentPackageM.name.equals(packageItems[4])) {
+					// 3号便利箱(5KG)
+					result = 79;
+				}
+				else if (currentPackageM.name.equals(packageItems[5])) {
+					// 标准件
+					result = 0;
+				}
+				else if (currentPackageM.name.equals(packageItems[6])) {
+					// 其他
+					result = 0;
+				}
+			}
+		}
+		else {
+			String[] shunFengItems = getResources().getStringArray(R.array.strs4);
+			String[] packageItems = getResources().getStringArray(R.array.strs1);
+			if (currentPlaceM.name.equals(shunFengItems[0])) {
+				// 北京
+				if (currentPackageM.name.equals(packageItems[0])) {
+					// 便利封(1KG)
+					result = 8;
+				}
+				else if (currentPackageM.name.equals(packageItems[1])) {
+					// 便利袋(1KG)
+					result = 8;
+				}
+				else if (currentPackageM.name.equals(packageItems[2])) {
+					// 1号便利箱(2KG)
+					result = 13;
+				}
+				else if (currentPackageM.name.equals(packageItems[3])) {
+					// 2号便利箱(3KG)
+					result = 18;
+				}
+				else if (currentPackageM.name.equals(packageItems[4])) {
+					// 3号便利箱(5KG)
+					result = 28;
+				}
+				else if (currentPackageM.name.equals(packageItems[5])) {
+					// 标准件
+					result = 0;
+				}
+				else if (currentPackageM.name.equals(packageItems[6])) {
+					// 其他
+					result = 0;
+				}
+			}
+			else if (currentPlaceM.name.equals(shunFengItems[1])) {
+				// 江苏、上海等
+				if (currentPackageM.name.equals(packageItems[0])) {
+					// 便利封(1KG)
+					result = 10;
+				}
+				else if (currentPackageM.name.equals(packageItems[1])) {
+					// 便利袋(1KG)
+					result = 10;
+				}
+				else if (currentPackageM.name.equals(packageItems[2])) {
+					// 1号便利箱(2KG)
+					result = 15;
+				}
+				else if (currentPackageM.name.equals(packageItems[3])) {
+					// 2号便利箱(3KG)
+					result = 20;
+				}
+				else if (currentPackageM.name.equals(packageItems[4])) {
+					// 3号便利箱(5KG)
+					result = 30;
+				}
+				else if (currentPackageM.name.equals(packageItems[5])) {
+					// 标准件
+					result = 0;
+				}
+				else if (currentPackageM.name.equals(packageItems[6])) {
+					// 其他
+					result = 0;
+				}
+			}
+			else if (currentPlaceM.name.equals(shunFengItems[2])) {
+				// 海南、青海等
+				if (currentPackageM.name.equals(packageItems[0])) {
+					// 便利封(1KG)
+					result = 15;
+				}
+				else if (currentPackageM.name.equals(packageItems[1])) {
+					// 便利袋(1KG)
+					result = 15;
+				}
+				else if (currentPackageM.name.equals(packageItems[2])) {
+					// 1号便利箱(2KG)
+					result = 25;
+				}
+				else if (currentPackageM.name.equals(packageItems[3])) {
+					// 2号便利箱(3KG)
+					result = 35;
+				}
+				else if (currentPackageM.name.equals(packageItems[4])) {
+					// 3号便利箱(5KG)
+					result = 55;
+				}
+				else if (currentPackageM.name.equals(packageItems[5])) {
+					// 标准件
+					result = 0;
+				}
+				else if (currentPackageM.name.equals(packageItems[6])) {
+					// 其他
+					result = 0;
+				}
+			}
+		}
+		
+		edittext_money.setText(result+"");
+		return result;
 	}
 }

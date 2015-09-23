@@ -80,13 +80,14 @@ public class SubActivity3 extends Activity implements OnClickListener {
 			SubActivity3.this.finish();
 			break;
 		case R.id.refresh_view:// 刷新
-			mDataList.clear();
 			getData();
 			break;
 		}
 	}
 
 	private void getData() {
+		mDataList.clear();
+		
 		String urlStr = "http://" + BaseAPI.IP_HOST
 				+ "/dxs/yjAction_getPersonList.action";
 

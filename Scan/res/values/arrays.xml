@@ -12,12 +12,12 @@
     </string-array>
     
     <string-array name="strs2">
+        <item>顺丰</item>
         <item>申通</item>
         <item>圆通</item>
         <item>中通</item>
         <item>韵达</item>
         <item>汇通</item>
-        <item>顺丰</item>
         <item>宅急送</item>
         <item>EMS</item>
         <item>京东</item>
@@ -38,7 +38,19 @@
         <item>其他</item>
     </string-array>
     
-    <string-array name="strs3">
+    <string-array name="strs3"><!-- 顺丰地点 -->
+        <item>北京、河北、天津</item>
+        <item>新疆、西藏</item>
+        <item>其他省份</item>
+    </string-array>
+    
+    <string-array name="strs4"><!-- 其他地点 -->
+        <item>北京</item>
+        <item>江苏、上海等</item>
+        <item>海南、青海等</item>
+    </string-array>
+    
+    <string-array name="strs5">
         <item>北京</item>
         <item>天津</item>
         <item>河北</item>

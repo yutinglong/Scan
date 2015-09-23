@@ -59,6 +59,7 @@ public class CaptureActivity extends Activity implements Callback, android.view.
 	private CaptureActivityHandler handler;
 	private ViewfinderView viewfinderView;
 	private boolean hasSurface;
+	private View zxing_input;
 	private Vector<BarcodeFormat> decodeFormats;
 	private String characterSet;
 	private SurfaceView surfaceView;
@@ -217,6 +218,8 @@ public class CaptureActivity extends Activity implements Callback, android.view.
 	private void initView(){
 		// 上层绘制框框的View
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
+		zxing_input = findViewById(R.id.zxing_input);
+		zxing_input.setOnClickListener(this);
 		
 //		zxingActionGallery = (HorizontalListView) findViewById(R.id.zxing_action_gallery);
 //		mGalleryAdapter = new ZxingOptionGalleryAdapter(this);
@@ -537,6 +540,12 @@ public class CaptureActivity extends Activity implements Callback, android.view.
 		case R.id.cancel_btn:// 操作动画页面的取消按钮
 			isCancel = true;
 			quitOption();
+			break;
+		case R.id.zxing_input:// 手动输入
+			Intent data = new Intent();
+			data.putExtra("MODE_2D_CODE", true);
+			setResult(RESULT_OK, data);
+			super.finish();
 			break;
 		}
 	}
