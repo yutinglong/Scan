@@ -9,6 +9,7 @@ import org.json.simple.JSONValue;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,8 +17,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,6 +33,7 @@ public class SubActivity3 extends Activity implements OnClickListener {
 	private View refresh_view;
 	private List<RecipientUser> mDataList = new ArrayList<RecipientUser>();
 	private MyAdapter mMyAdapter;
+	public static RecipientUser currentRecipientUser;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,13 @@ public class SubActivity3 extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_sub3);
 
 		initView();
+	}
+	
+
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 		getData();
 	}
 
@@ -49,6 +59,18 @@ public class SubActivity3 extends Activity implements OnClickListener {
 		user_listview = (ListView) findViewById(R.id.user_listview);
 		refresh_view = findViewById(R.id.refresh_view);
 		refresh_view.setOnClickListener(this);
+		
+		user_listview.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> paramAdapterView,
+					View paramView, int paramInt, long paramLong) {
+				RecipientUser mRecipientUser = mDataList.get(paramInt);
+				currentRecipientUser = mRecipientUser;
+				
+				Intent intentL = new Intent(SubActivity3.this, UserGetData.class);
+				startActivity(intentL);
+			}
+		});
 	}
 
 	@Override

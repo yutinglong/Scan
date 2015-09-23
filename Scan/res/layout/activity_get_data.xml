@@ -1,0 +1,154 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F4F4" >
+
+    <RelativeLayout
+        android:id="@+id/newmore_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff" >
+
+        <TextView
+            android:id="@+id/newmore_btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:clickable="true"
+            android:drawableLeft="@drawable/personal_ico_return"
+            android:drawablePadding="-5dip"
+            android:gravity="center"
+            android:text="返回"
+            android:textColor="#80737B"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/newmore_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="用户取件"
+            android:textColor="#80737B"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/newmore_title_bar"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff"
+        android:fadingEdge="none"
+        android:fadingEdgeLength="0dip"
+        android:scrollbars="none" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingTop="10dp" >
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="付国军"
+                android:textColor="#80737B"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/user_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="1877898942"
+                android:textColor="#80737B"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/user_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_name"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="共4个在店包裹"
+                android:textColor="#80737B"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_below="@id/user_tip"
+                android:layout_marginTop="10dp"
+                android:background="@color/black_alpha_85"
+                android:clickable="true"
+                android:gravity="center" />
+
+            <LinearLayout
+                android:id="@+id/content_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_tip"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edittext_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/content_layout"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="20dip"
+                android:background="@drawable/suggestion_bg"
+                android:cursorVisible="true"
+                android:gravity="left|top"
+                android:hint="请输入取货密码"
+                android:numeric="integer"
+                android:maxLines="1"
+                android:padding="10dip"
+                android:textColor="#80737b"
+                android:textColorHint="#ccc2c9"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/user_pwd_forget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/edittext_pwd"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="用户忘记密码?再获取!"
+                android:textColor="#80777b"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btn1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/user_pwd_forget"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/btn_pink_bg"
+                android:minHeight="40dp"
+                android:text="全部取走"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

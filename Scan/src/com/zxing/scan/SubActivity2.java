@@ -24,6 +24,7 @@ import com.zxing.scan.module.PlaceM;
 import com.zxing.scan.net.BaseAPI;
 import com.zxing.scan.net.BaseAPI.RequestListener;
 
+// 用户寄件
 public class SubActivity2 extends Activity implements OnClickListener{
 	private View backBtn;
 	private EditText mEditTextOrderID;
