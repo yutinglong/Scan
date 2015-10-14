@@ -22,9 +22,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zxing.scan.module.RecipientUser;
 import com.zxing.scan.net.BaseAPI;
+import com.zxing.scan.net.BaseAPI.RequestListener;
 
 // 代收货
 public class SubActivity3 extends Activity implements OnClickListener {
@@ -91,22 +93,30 @@ public class SubActivity3 extends Activity implements OnClickListener {
 		String urlStr = "http://" + BaseAPI.IP_HOST
 				+ "/dxs/yjAction_getPersonList.action";
 
-		// try {
-		// BaseAPI.requestByGet(urlStr, new RequestListener() {
-		// @Override
-		// public void onSuccess(String result) {
-		// parseStr(result);
-		// }
-		//
-		// @Override
-		// public void onFailure() {
-		//
-		// }
-		//
-		// });
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
+//		try {
+//			BaseAPI.requestByGet(urlStr, new RequestListener() {
+//				@Override
+//				public void onSuccess(String result) {
+//					parseStr(result);
+//					Log.d("YTL", "======mDataList = " + mDataList.size());
+//					
+//					if (mDataList == null || mDataList.size() == 0) {
+//						Toast.makeText(SubActivity3.this, "数据为空", Toast.LENGTH_SHORT).show();
+//					}
+//					
+//					mMyAdapter = new MyAdapter(SubActivity3.this);
+//					user_listview.setAdapter(mMyAdapter);
+//				}
+//
+//				@Override
+//				public void onFailure() {
+//					Toast.makeText(SubActivity3.this, "操作失败，请检查网络或IP设置", Toast.LENGTH_SHORT).show();
+//				}
+//
+//			});
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 		parseStr(tempStr);
 		Log.d("YTL", "======mDataList = " + mDataList.size());

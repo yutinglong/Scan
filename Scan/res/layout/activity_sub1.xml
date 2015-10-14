@@ -68,8 +68,8 @@
                 android:textColorHint="#ccc2c9"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/edittext1"
+            <TextView
+                android:id="@+id/edittext_company"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dip"
@@ -95,6 +95,7 @@
                 android:background="@drawable/suggestion_bg"
                 android:gravity="left|top"
                 android:hint="请输入手机号"
+                android:phoneNumber="true"
                 android:imeOptions="actionNext"
                 android:maxLines="1"
                 android:padding="10dip"

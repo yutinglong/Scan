@@ -141,7 +141,7 @@ public class UserGetData extends Activity implements OnClickListener{
 
 				@Override
 				public void onFailure() {
-
+					Toast.makeText(UserGetData.this, "操作失败，请检查网络或IP设置", Toast.LENGTH_SHORT).show();
 				}
 
 			});
@@ -157,6 +157,7 @@ public class UserGetData extends Activity implements OnClickListener{
 			UserGetData.this.finish();
 			break;
 		case R.id.btn1:
+			getPackage();
 			break;
 		case R.id.user_pwd_forget:
 			Toast.makeText(this, "忘记密码，功能待开发", Toast.LENGTH_LONG).show();

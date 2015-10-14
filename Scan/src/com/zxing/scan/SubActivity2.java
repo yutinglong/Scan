@@ -95,7 +95,8 @@ public class SubActivity2 extends Activity implements OnClickListener{
 					edittext_money.setEnabled(false);
 				}
 				else {
-					edittext_money.setText("0");
+					int tempResult = getMoney();
+					edittext_money.setText(tempResult+"");
 					edittext_money.setEnabled(true);
 				}
 			}
@@ -134,7 +135,7 @@ public class SubActivity2 extends Activity implements OnClickListener{
 			urlStr = urlStr + "waybillCode=" + mTemp;
 		}
 		else {
-			Toast.makeText(this, "请填写数据", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "填写数据不完整", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		
@@ -143,7 +144,7 @@ public class SubActivity2 extends Activity implements OnClickListener{
 			urlStr = urlStr + "&expressCompanyName=" + mTemp;
 		}
 		else {
-			Toast.makeText(this, "请填写数据", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "填写数据不完整", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		
@@ -152,7 +153,7 @@ public class SubActivity2 extends Activity implements OnClickListener{
 			urlStr = urlStr + "&senderUserTelephone=" + mTemp;
 		}
 		else {
-			Toast.makeText(this, "请填写数据", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "填写数据不完整", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		
@@ -161,7 +162,7 @@ public class SubActivity2 extends Activity implements OnClickListener{
 			urlStr = urlStr + "&senderUserName=" + mTemp;
 		}
 		else {
-			Toast.makeText(this, "请填写数据", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "填写数据不完整", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		
@@ -170,7 +171,7 @@ public class SubActivity2 extends Activity implements OnClickListener{
 			urlStr = urlStr + "&type1=" + mTemp;
 		}
 		else {
-			Toast.makeText(this, "请填写数据", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "填写数据不完整", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		
@@ -179,7 +180,7 @@ public class SubActivity2 extends Activity implements OnClickListener{
 			urlStr = urlStr + "&senderArea=" + mTemp;
 		}
 		else {
-			Toast.makeText(this, "请填写数据", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "填写数据不完整", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		
@@ -188,7 +189,7 @@ public class SubActivity2 extends Activity implements OnClickListener{
 			urlStr = urlStr + "&money=" + mTemp;
 		}
 		else {
-			Toast.makeText(this, "请填写数据", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "填写数据不完整", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		
@@ -214,7 +215,7 @@ public class SubActivity2 extends Activity implements OnClickListener{
 
 				@Override
 				public void onFailure() {
-					
+					Toast.makeText(SubActivity2.this, "新建失败，请检查网络或IP设置", Toast.LENGTH_SHORT).show();
 				}
 				
 			});

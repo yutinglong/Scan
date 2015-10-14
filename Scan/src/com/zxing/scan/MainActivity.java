@@ -6,25 +6,30 @@ import java.util.TimerTask;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.zxing.scan.net.BaseAPI;
 import com.zxing.scan.zxing.CaptureActivity;
 
 public class MainActivity extends Activity implements OnClickListener {
 	private static final String weidianURL = "http://weidian.com/item.html?itemID=230780308&wfr=wx&from=singlemessage&isappinstalled=0";
 	public static final int REQ_THIRD = 100;
 
-	private Button btn1, btn2, btn3, btn4;
+	private Button btn1, btn2, btn3, btn4, fast_btn1;
 	private ImageView setting_img;
+	private EditText edittext_password;
 
 	protected Timer timer;
 	private boolean isExit;
@@ -37,6 +42,12 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
+		
+		SharedPreferences sharedPreferences = getSharedPreferences("setting", Context.MODE_PRIVATE); //私有数据
+		String IPStr = sharedPreferences.getString("IPStr", BaseAPI.IP_HOST);
+		if (!TextUtils.isEmpty(IPStr)) {
+			BaseAPI.IP_HOST = IPStr;
+		}
 
 		initView();
 	}
@@ -52,6 +63,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		btn3.setOnClickListener(this);
 		btn4.setOnClickListener(this);
 		setting_img.setOnClickListener(this);
+		
+		edittext_password = (EditText) findViewById(R.id.edittext_password);
+		fast_btn1 = (Button) findViewById(R.id.fast_btn1);
+		fast_btn1.setOnClickListener(this);
 	}
 
 	@Override
@@ -75,6 +90,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.setting_img:
 			Intent intentL = new Intent(this, SettingActivity.class);
 			startActivity(intentL);
+			break;
+		case R.id.fast_btn1:// 快速取货
+			fastGet();
 			break;
 		}
 	}
@@ -103,6 +121,17 @@ public class MainActivity extends Activity implements OnClickListener {
 		}
 	}
 
+	/**
+	 * 快速取货
+	 */
+	private void fastGet() {
+		String mTemp = edittext_password.getText().toString();
+		if (TextUtils.isEmpty(mTemp)) {
+			Toast.makeText(this, "请输入取货码", Toast.LENGTH_SHORT).show();
+			return;
+		}
+	}
+	
 	class MyTimerTask extends TimerTask {
 		@Override
 		public void run() {
