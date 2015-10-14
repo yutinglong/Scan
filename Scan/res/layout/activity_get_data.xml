@@ -58,7 +58,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
-                android:text="付国军"
                 android:textColor="#80737B"
                 android:textSize="20sp" />
 
@@ -69,7 +68,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:gravity="center"
-                android:text="1877898942"
                 android:textColor="#80737B"
                 android:textSize="20sp" />
 
@@ -81,7 +79,6 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="共4个在店包裹"
                 android:textColor="#80737B"
                 android:textSize="14sp" />
 

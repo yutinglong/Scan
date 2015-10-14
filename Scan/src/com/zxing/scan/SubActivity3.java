@@ -125,7 +125,7 @@ public class SubActivity3 extends Activity implements OnClickListener {
 		user_listview.setAdapter(mMyAdapter);
 	}
 
-	private String tempStr = "[{\"recipientUserName\":\"张aa\",\"recipientUserTelephone\":\"13717674041\",\"date\":\"2015-09-03 14:01:31\",\"num\":\"2\"}, {\"recipientUserName\":\"张五\",\"recipientUserTelephone\":\"12717674041\",\"date\":\"2015-09-03 14:01:31\",\"num\":\"1\"}]";
+	private String tempStr = "[{\"recipientUserName\":\"张aa\",\"recipientUserTelephone\":\"13717674044\",\"date\":\"2015-09-03 14:01:31\",\"num\":\"2\"}, {\"recipientUserName\":\"张五\",\"recipientUserTelephone\":\"12717674041\",\"date\":\"2015-09-03 14:01:31\",\"num\":\"1\"}]";
 
 	private void parseStr(String response) {
 		JSONArray mJSONArray = (JSONArray) JSONValue.parse(response);

@@ -59,13 +59,52 @@ public class UserGetData extends Activity implements OnClickListener{
 		user_pwd_forget.setOnClickListener(this);
 	}
 	
-	private void getData(){
-		parseStr(tempStr);
+	/**
+	 * 获取某个用户的所有包裹
+	 */
+	private void getData() {
+		String urlStr = "http://" + BaseAPI.IP_HOST
+				+ "/dxs/yjAction_getPackageList.action?";
 		
-		initContentLayout();
+		if (SubActivity3.currentRecipientUser != null && !TextUtils.isEmpty(SubActivity3.currentRecipientUser.recipientUserTelephone)) {
+			urlStr = urlStr + "recipientUserTelephone=" + SubActivity3.currentRecipientUser.recipientUserTelephone;
+		}
+		else {
+			Toast.makeText(UserGetData.this, "获取失败，请确认数据是否正确", Toast.LENGTH_SHORT).show();
+			this.finish();
+			return;
+		}
+		
+		try {
+			BaseAPI.requestByGet(urlStr, new RequestListener() {
+				@Override
+				public void onSuccess(String result) {
+					// 成功
+					parseStr(result);
+					initContentLayout();
+				}
+
+				@Override
+				public void onFailure() {
+					Toast.makeText(UserGetData.this, "操作失败，请检查网络或IP设置", Toast.LENGTH_SHORT).show();
+					UserGetData.this.finish();
+				}
+
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+//		parseStr(tempStr);
+//		initContentLayout();
 	}
 	
 	private void initContentLayout() {
+		if (mDataList == null || mDataList.size() == 0) {
+			Toast.makeText(UserGetData.this, "获取失败，请确认数据是否正确", Toast.LENGTH_SHORT).show();
+			UserGetData.this.finish();
+			return;
+		}
 		for (RecipientData mRecipientData : mDataList) {
 			View itemLayout = View.inflate(this, R.layout.content_layout_item, null);
 			TextView name = (TextView) itemLayout.findViewById(R.id.name);
@@ -108,7 +147,7 @@ public class UserGetData extends Activity implements OnClickListener{
 		String urlStr = "http://" + BaseAPI.IP_HOST
 				+ "/dxs/yjAction_getPackage.action?";
 		
-		if (SubActivity3.currentRecipientUser != null && TextUtils.isEmpty(SubActivity3.currentRecipientUser.recipientUserTelephone)) {
+		if (SubActivity3.currentRecipientUser != null && !TextUtils.isEmpty(SubActivity3.currentRecipientUser.recipientUserTelephone)) {
 			urlStr = urlStr + "recipientUserTelephone=" + SubActivity3.currentRecipientUser.recipientUserTelephone;
 		}
 		else {
@@ -117,7 +156,7 @@ public class UserGetData extends Activity implements OnClickListener{
 		}
 		
 		String identifyingCode = edittext_pwd.getText().toString();
-		if (TextUtils.isEmpty(identifyingCode)) {
+		if (!TextUtils.isEmpty(identifyingCode)) {
 			urlStr = urlStr + "&identifyingCode=" + identifyingCode;
 		}
 		else {
@@ -131,11 +170,11 @@ public class UserGetData extends Activity implements OnClickListener{
 				public void onSuccess(String result) {
 					if ("1".equals(result)) {
 						// 成功
-						Toast.makeText(UserGetData.this, "取货成功", Toast.LENGTH_SHORT).show();
+						Toast.makeText(UserGetData.this, "取货成功,请讲包裹交给用户!", Toast.LENGTH_LONG).show();
 						UserGetData.this.finish();
 					}
 					else {
-						Toast.makeText(UserGetData.this, "取货失败，请确认取货密码是否正确!", Toast.LENGTH_LONG).show();
+						Toast.makeText(UserGetData.this, "取货失败，请确认取货密码是否正确!", Toast.LENGTH_SHORT).show();
 					}
 				}
 
