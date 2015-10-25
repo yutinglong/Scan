@@ -210,6 +210,7 @@
                 android:background="@drawable/btn_pink_bg"
                 android:minHeight="40dp"
                 android:text="新建"
+                android:textSize="18sp"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
     </ScrollView>

@@ -34,6 +34,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/btn_pink_bg"
             android:minHeight="40dp"
+            android:textSize="18sp"
             android:text="签收快件"
             android:textColor="#FFFFFF" />
 
@@ -63,6 +64,7 @@
             android:background="@drawable/btn_pink_bg"
             android:minHeight="40dp"
             android:text="取件"
+            android:textSize="18sp"
             android:textColor="#FFFFFF" />
     </LinearLayout>
 
@@ -85,6 +87,7 @@
             android:background="@drawable/btn_pink_bg"
             android:minHeight="100dp"
             android:text="代收货"
+            android:textSize="18sp"
             android:textColor="#FFFFFF" />
 
         <Button
@@ -96,6 +99,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/btn_pink_bg"
+            android:textSize="18sp"
             android:minHeight="100dp"
             android:text="寄快件"
             android:textColor="#FFFFFF" />
@@ -112,6 +116,7 @@
         android:background="@drawable/btn_pink_bg"
         android:minHeight="100dp"
         android:text="我的微店"
+        android:textSize="18sp"
         android:textColor="#FFFFFF" />
 
     <ImageView

@@ -129,7 +129,7 @@ public class SubActivity2 extends Activity implements OnClickListener{
 		}
 	}
 	private void commitData() {
-		String urlStr = "http://" + BaseAPI.IP_HOST + "/dxs/yjAction_add.action?";
+		String urlStr = "http://" + BaseAPI.IP_HOST + "/dxs/yjAction_daijiAdd.action?";
 		String mTemp = mEditTextOrderID.getText().toString();
 		if (!TextUtils.isEmpty(mTemp)) {
 			urlStr = urlStr + "waybillCode=" + mTemp;
@@ -194,12 +194,12 @@ public class SubActivity2 extends Activity implements OnClickListener{
 		}
 		
 		if (checkbox_money.isChecked()) {
-			urlStr = urlStr + "&type=1";
-		}
-		else {
 			urlStr = urlStr + "&type=0";
 		}
-		urlStr = urlStr + "&state=0";
+		else {
+			urlStr = urlStr + "&type=1";
+		}
+		urlStr = urlStr + "&state=1";
 		
 		Log.d("YTL", "urlStr = " + urlStr);
 		try {

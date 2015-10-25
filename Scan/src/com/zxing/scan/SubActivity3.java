@@ -1,6 +1,9 @@
 package com.zxing.scan;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -93,36 +96,35 @@ public class SubActivity3 extends Activity implements OnClickListener {
 		String urlStr = "http://" + BaseAPI.IP_HOST
 				+ "/dxs/yjAction_getPersonList.action";
 
-//		try {
-//			BaseAPI.requestByGet(urlStr, new RequestListener() {
-//				@Override
-//				public void onSuccess(String result) {
-//					parseStr(result);
-//					Log.d("YTL", "======mDataList = " + mDataList.size());
-//					
-//					if (mDataList == null || mDataList.size() == 0) {
-//						Toast.makeText(SubActivity3.this, "数据为空", Toast.LENGTH_SHORT).show();
-//					}
-//					
-//					mMyAdapter = new MyAdapter(SubActivity3.this);
-//					user_listview.setAdapter(mMyAdapter);
-//				}
-//
-//				@Override
-//				public void onFailure() {
-//					Toast.makeText(SubActivity3.this, "操作失败，请检查网络或IP设置", Toast.LENGTH_SHORT).show();
-//				}
-//
-//			});
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			BaseAPI.requestByGet(urlStr, new RequestListener() {
+				@Override
+				public void onSuccess(String result) {
+					parseStr(result);
+					Log.d("YTL", "======mDataList = " + mDataList.size());
+					
+					if (mDataList == null || mDataList.size() == 0) {
+						Toast.makeText(SubActivity3.this, "数据为空", Toast.LENGTH_SHORT).show();
+					}
+					
+					mMyAdapter = new MyAdapter(SubActivity3.this);
+					user_listview.setAdapter(mMyAdapter);
+				}
 
-		parseStr(tempStr);
-		Log.d("YTL", "======mDataList = " + mDataList.size());
-		
-		mMyAdapter = new MyAdapter(this);
-		user_listview.setAdapter(mMyAdapter);
+				@Override
+				public void onFailure() {
+					Toast.makeText(SubActivity3.this, "操作失败，请检查网络或IP设置", Toast.LENGTH_SHORT).show();
+				}
+
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+//		parseStr(tempStr);
+//		Log.d("YTL", "======mDataList = " + mDataList.size());
+//		mMyAdapter = new MyAdapter(this);
+//		user_listview.setAdapter(mMyAdapter);
 	}
 
 	private String tempStr = "[{\"recipientUserName\":\"张aa\",\"recipientUserTelephone\":\"13717674044\",\"date\":\"2015-09-03 14:01:31\",\"num\":\"2\"}, {\"recipientUserName\":\"张五\",\"recipientUserTelephone\":\"12717674041\",\"date\":\"2015-09-03 14:01:31\",\"num\":\"1\"}]";
@@ -159,9 +161,24 @@ public class SubActivity3 extends Activity implements OnClickListener {
 		public long getItemId(int position) {
 			return 0;
 		}
+		
+		private String getStringDate(String date) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+			try {
+				Date mDate =  sdf.parse(date);
+				
+				SimpleDateFormat formatter = new SimpleDateFormat("MM/dd hh:mm");
+				String dateStr = formatter.format(new Date());//格式化数据
+				
+				return dateStr;
+			} catch (ParseException e) {
+				e.printStackTrace();
+				return "";
+			}
+		}
 
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView, ViewGroup parent) {
 			ViewHolder holder;
 			if (convertView == null) {
 				convertView = mInflater.inflate(R.layout.listview_item, null);
@@ -177,9 +194,23 @@ public class SubActivity3 extends Activity implements OnClickListener {
 			}
 			holder.title.setText(mDataList.get(position).recipientUserName
 					+ "/" + mDataList.get(position).recipientUserTelephone);
-			holder.time.setText(mDataList.get(position).date);
+			
+			
+			holder.time.setText(getStringDate(mDataList.get(position).date));
 			holder.num_str.setText(mDataList.get(position).num + "个包裹");
 
+			holder.title.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					RecipientUser mRecipientUser = mDataList.get(position);
+					currentRecipientUser = mRecipientUser;
+					
+					Intent intentL = new Intent(SubActivity3.this, UserGetData.class);
+					startActivity(intentL);
+				}
+			});
+			
 			return convertView;
 		}
 

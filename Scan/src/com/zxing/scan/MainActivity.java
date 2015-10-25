@@ -130,6 +130,11 @@ public class MainActivity extends Activity implements OnClickListener {
 			Toast.makeText(this, "请输入取货码", Toast.LENGTH_SHORT).show();
 			return;
 		}
+		
+		Intent intentL = new Intent(MainActivity.this, UserGetData.class);
+		intentL.putExtra("identifyingCode", mTemp);
+		startActivity(intentL);
+		edittext_password.setText("");
 	}
 	
 	class MyTimerTask extends TimerTask {

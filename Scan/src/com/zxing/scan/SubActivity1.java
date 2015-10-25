@@ -69,7 +69,7 @@ public class SubActivity1 extends Activity implements OnClickListener{
 	}
 	
 	private void commitData() {
-		String urlStr = "http://" + BaseAPI.IP_HOST + "/dxs/yjAction_add.action?";
+		String urlStr = "http://" + BaseAPI.IP_HOST + "/dxs/yjAction_daishouAdd.action?";
 		String mTemp = mOrderEditText.getText().toString();
 		if (!TextUtils.isEmpty(mTemp)) {
 			urlStr = urlStr + "waybillCode=" + mTemp;
@@ -81,7 +81,7 @@ public class SubActivity1 extends Activity implements OnClickListener{
 		
 		mTemp = edittext_company.getText().toString();
 		if (!TextUtils.isEmpty(mTemp)) {
-			urlStr = urlStr + "waybillCode=" + mTemp;
+			urlStr = urlStr + "&expressCompanyName=" + mTemp;
 		}
 		else {
 			Toast.makeText(this, "请填写全部数据", Toast.LENGTH_SHORT).show();
@@ -90,7 +90,7 @@ public class SubActivity1 extends Activity implements OnClickListener{
 		
 		mTemp = mEditText2.getText().toString();
 		if (!TextUtils.isEmpty(mTemp)) {
-			urlStr = urlStr + "waybillCode=" + mTemp;
+			urlStr = urlStr + "&recipientUserTelephone=" + mTemp;
 		}
 		else {
 			Toast.makeText(this, "请填写全部数据", Toast.LENGTH_SHORT).show();
@@ -99,7 +99,7 @@ public class SubActivity1 extends Activity implements OnClickListener{
 		
 		mTemp = mEditText3.getText().toString();
 		if (!TextUtils.isEmpty(mTemp)) {
-			urlStr = urlStr + "waybillCode=" + mTemp;
+			urlStr = urlStr + "&recipientUserName=" + mTemp;
 		}
 		else {
 			Toast.makeText(this, "请填写全部数据", Toast.LENGTH_SHORT).show();
@@ -108,12 +108,14 @@ public class SubActivity1 extends Activity implements OnClickListener{
 		
 		mTemp = mEditText4.getText().toString();
 		if (!TextUtils.isEmpty(mTemp)) {
-			urlStr = urlStr + "waybillCode=" + mTemp;
+			urlStr = urlStr + "&remark=" + mTemp;
 		}
 		else {
 			Toast.makeText(this, "请填写全部数据", Toast.LENGTH_SHORT).show();
 			return;
 		}
+		
+		urlStr = urlStr + "&state=1";
 		
 		Log.d("YTL", "urlStr = " + urlStr);
 		try {

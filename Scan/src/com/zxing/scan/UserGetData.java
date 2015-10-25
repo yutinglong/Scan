@@ -34,11 +34,18 @@ public class UserGetData extends Activity implements OnClickListener{
 	private TextView user_pwd_forget;
 	private List<RecipientData> mDataList = new ArrayList<RecipientData>();
 	
+	private String identifyingCode;// 取货码
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_get_data);
+		
+		
+//		intentL.putExtra("identifyingCode", mTemp);
+		
+		identifyingCode = getIntent().getStringExtra("identifyingCode");
 		
 		initView();
 		getData();
@@ -65,8 +72,10 @@ public class UserGetData extends Activity implements OnClickListener{
 	private void getData() {
 		String urlStr = "http://" + BaseAPI.IP_HOST
 				+ "/dxs/yjAction_getPackageList.action?";
-		
-		if (SubActivity3.currentRecipientUser != null && !TextUtils.isEmpty(SubActivity3.currentRecipientUser.recipientUserTelephone)) {
+		if (identifyingCode != null && !identifyingCode.equals("")) {
+			urlStr = urlStr + "identifyingCode=" + identifyingCode;
+		}
+		else if (SubActivity3.currentRecipientUser != null && !TextUtils.isEmpty(SubActivity3.currentRecipientUser.recipientUserTelephone)) {
 			urlStr = urlStr + "recipientUserTelephone=" + SubActivity3.currentRecipientUser.recipientUserTelephone;
 		}
 		else {
@@ -101,10 +110,16 @@ public class UserGetData extends Activity implements OnClickListener{
 	
 	private void initContentLayout() {
 		if (mDataList == null || mDataList.size() == 0) {
-			Toast.makeText(UserGetData.this, "获取失败，请确认数据是否正确", Toast.LENGTH_SHORT).show();
+			Toast.makeText(UserGetData.this, "取货码错误", Toast.LENGTH_SHORT).show();
 			UserGetData.this.finish();
 			return;
 		}
+		
+		if (identifyingCode != null && !"".equals(identifyingCode)) {
+			edittext_pwd.setVisibility(View.GONE);
+			user_pwd_forget.setVisibility(View.GONE);
+		}
+		
 		for (RecipientData mRecipientData : mDataList) {
 			View itemLayout = View.inflate(this, R.layout.content_layout_item, null);
 			TextView name = (TextView) itemLayout.findViewById(R.id.name);
@@ -125,8 +140,9 @@ public class UserGetData extends Activity implements OnClickListener{
 		
 		if (SubActivity3.currentRecipientUser != null) {
 			user_phone.setText(SubActivity3.currentRecipientUser.recipientUserTelephone);
-			user_tip.setText("共"+SubActivity3.currentRecipientUser.num+"个包裹");
 		}
+		
+		user_tip.setText("共"+mDataList.size()+"个包裹");
 	}
 	
 	private void parseStr(String response) {
@@ -140,28 +156,33 @@ public class UserGetData extends Activity implements OnClickListener{
 		}
 	}
 	
-	private String tempStr = "[{\"waybillCode\":\"DXS111111120\",\"expressCompanyName\":\"中通\",\"recipientUserName\":\"张三\",\"date2\":\"2015-09-03 14:01:31\",\"remark\":\"一些备注\"},{\"waybillCode\":\"DXS111111117\",\"expressCompanyName\":\"顺丰\",\"recipientUserName\":\"张三\",\"date2\":\"2015-09-03 13:55:33\",\"remark\":\"\"}]";
+//	private String tempStr = "[{\"waybillCode\":\"DXS111111120\",\"expressCompanyName\":\"中通\",\"recipientUserName\":\"张三\",\"date2\":\"2015-09-03 14:01:31\",\"remark\":\"一些备注\"},{\"waybillCode\":\"DXS111111117\",\"expressCompanyName\":\"顺丰\",\"recipientUserName\":\"张三\",\"date2\":\"2015-09-03 13:55:33\",\"remark\":\"\"}]";
 
 	
 	private void getPackage() {
 		String urlStr = "http://" + BaseAPI.IP_HOST
 				+ "/dxs/yjAction_getPackage.action?";
 		
-		if (SubActivity3.currentRecipientUser != null && !TextUtils.isEmpty(SubActivity3.currentRecipientUser.recipientUserTelephone)) {
-			urlStr = urlStr + "recipientUserTelephone=" + SubActivity3.currentRecipientUser.recipientUserTelephone;
-		}
-		else {
-			Toast.makeText(this, "请填写数据", Toast.LENGTH_SHORT).show();
-			return;
-		}
-		
-		String identifyingCode = edittext_pwd.getText().toString();
-		if (!TextUtils.isEmpty(identifyingCode)) {
+		if (identifyingCode != null && !identifyingCode.equals("")) {
 			urlStr = urlStr + "&identifyingCode=" + identifyingCode;
 		}
 		else {
-			Toast.makeText(this, "请填写数据", Toast.LENGTH_SHORT).show();
-			return;
+			if (SubActivity3.currentRecipientUser != null && !TextUtils.isEmpty(SubActivity3.currentRecipientUser.recipientUserTelephone)) {
+				urlStr = urlStr + "recipientUserTelephone=" + SubActivity3.currentRecipientUser.recipientUserTelephone;
+			}
+			else {
+				Toast.makeText(this, "请填写数据", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			
+			String identifyingCode = edittext_pwd.getText().toString();
+			if (!TextUtils.isEmpty(identifyingCode)) {
+				urlStr = urlStr + "&identifyingCode=" + identifyingCode;
+			}
+			else {
+				Toast.makeText(this, "请填写数据", Toast.LENGTH_SHORT).show();
+				return;
+			}
 		}
 		
 		try {

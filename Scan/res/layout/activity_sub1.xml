@@ -147,6 +147,7 @@
                 android:background="@drawable/btn_pink_bg"
                 android:minHeight="40dp"
                 android:text="签收"
+                android:textSize="18sp"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
     </ScrollView>
