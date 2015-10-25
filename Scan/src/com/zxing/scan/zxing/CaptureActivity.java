@@ -70,7 +70,7 @@ public class CaptureActivity extends Activity implements Callback, android.view.
 	private static final float BEEP_VOLUME = 0.10f;
 
 	private TextView qrBack;// 返回按钮
-	private ImageView barcodeTorchIcon;
+//	private ImageView barcodeTorchIcon;
 	
 	private FrameLayout previewLayout;
 	
@@ -227,8 +227,8 @@ public class CaptureActivity extends Activity implements Callback, android.view.
 //		zxingActionGallery.setOnItemClickListener(this);
 		
 		
-		barcodeTorchIcon = (ImageView) findViewById(R.id.barcode_torch_icon);
-		barcodeTorchIcon.setOnClickListener(this);
+//		barcodeTorchIcon = (ImageView) findViewById(R.id.barcode_torch_icon);
+//		barcodeTorchIcon.setOnClickListener(this);
 		
 		qrBack = (TextView) findViewById(R.id.newmore_btn_back);
 		qrBack.setOnClickListener(this);
@@ -396,12 +396,12 @@ public class CaptureActivity extends Activity implements Callback, android.view.
 	 * 刷新当前闪光灯状态的icon
 	 */
 	private void refreshTorchIcon(){
-		if(CameraManager.get().isOpenFlash()){
-			barcodeTorchIcon.setImageResource(R.drawable.barcode_torch_icon_on);
-		}
-		else{
-			barcodeTorchIcon.setImageResource(R.drawable.barcode_torch_icon_off);
-		}
+//		if(CameraManager.get().isOpenFlash()){
+//			barcodeTorchIcon.setImageResource(R.drawable.barcode_torch_icon_on);
+//		}
+//		else{
+//			barcodeTorchIcon.setImageResource(R.drawable.barcode_torch_icon_off);
+//		}
 	}
 	
 	public ViewfinderView getViewfinderView() {
@@ -533,10 +533,10 @@ public class CaptureActivity extends Activity implements Callback, android.view.
 		case R.id.newmore_btn_back:// 返回按钮
 			finish();
 			break;
-		case R.id.barcode_torch_icon:// 闪光灯
-			CameraManager.get().changeFlashZxing();
-			refreshTorchIcon();
-			break;
+//		case R.id.barcode_torch_icon:// 闪光灯
+//			CameraManager.get().changeFlashZxing();
+//			refreshTorchIcon();
+//			break;
 		case R.id.cancel_btn:// 操作动画页面的取消按钮
 			isCancel = true;
 			quitOption();

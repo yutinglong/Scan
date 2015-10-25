@@ -25,16 +25,6 @@
             android:background="@color/transparent" />
     </FrameLayout>
 
-    <ImageView
-        android:id="@+id/barcode_torch_icon"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/top_title_layout"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/barcode_torch_switcher_drawable"
-        android:src="@drawable/barcode_torch_icon_off"
-        android:visibility="gone" />
 
     <!-- 顶部标题栏 -->
 
